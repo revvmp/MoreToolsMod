@@ -1,7 +1,6 @@
 package net.moretoolsmod;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
@@ -37,7 +36,8 @@ public class MoreToolsMod {
         modEventBus.addListener(this::commonSetup);
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
-
+        ModBlocks.BLOCKS.register(modEventBus);
+        ModBlocks.ITEMS.register(modEventBus);
         ModItems.register(modEventBus);
 
 
@@ -62,6 +62,13 @@ public class MoreToolsMod {
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             event.accept(ModItems.OBSIDIAN_SWORD);
         }
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            event.accept(ModItems.OBSIDIAN_HOE);
+        }
+        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+            event.accept(ModBlocks.POOP_ORE_ITEM.get());
+        }
+
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
